@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Folk Williams Financial Management | Premium Financial Services</title>
+    <meta name="description" content="Accounting, tax preparation, and business management solutions for individuals and businesses.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?
+    family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&
+    family=Inter:wght@300;400;500;600&
+    family=DM+Mono:wght@300;400&
+    family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* =========================================
+           DESIGN SYSTEM & VARIABLES
+           Derived from Logo & Theme Requirements
+           ========================================= */
+
+        
+        :root {
+            /* Brand Colors */
+            --color-primary: #00AECC;      /* Logo Cyan */
+            --color-navy: #0B1B2B;         /* Deep Ocean Navy */
+            --color-ivory: #F9F7F4;        /* Warm Background */
+            --color-sand: #EDE8DF;         /* Secondary Warmth */
+            --color-gold: #C4A76B;         /* Premium Accent */
+            --color-text: #0B1B2B;         /* Primary Text */
+            --color-text-muted: #5A6B7C;   /* Muted Text */
+            
+            /* Typography Scale */
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'DM Mono', monospace;
+            
+            /* Spacing & Layout */
+            --container-width: 1280px;
+            --section-padding: 6rem 2rem;
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 16px;
+            
+            /* Transitions */
+            --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Reset & Base Styles */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        html { scroll-behavior: smooth; font-size: 16px; }
+        
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-ivory);
+            color: var(--color-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: var(--font-serif);
+            font-weight: 500;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        .mono-accent { font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.05em; text-transform: uppercase; }
+
+        /* Utility Classes */
+        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 2rem; }
+        .grid { display: grid; gap: 2rem; }
+        .flex { display: flex; align-items: center; }
+        .text-center { text-align: center; }
+        .hidden-mobile { display: none; }
+        
+        @media(min-width: 768px) { .hidden-mobile { display: block; } }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2rem;
+            font-family: var(--font-sans);
+            font-weight: 500;
+            font-size: 0.95rem;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            text-decoration: none;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: #fff;
+        }
+        .btn-primary:hover { background-color: #009ab5; transform: translateY(-2px); }
+
+        .btn-outline {
+            background-color: transparent;
+            border-color: var(--color-navy);
+            color: var(--color-navy);
+        }
+        .btn-outline:hover { background-color: var(--color-navy); color: #fff; }
+
+        .btn-gold {
+            background-color: var(--color-gold);
+            color: #fff;
+        }
+        .btn-gold:hover { background-color: #b0955e; }
+
+        /* =========================================
+           HEADER / NAVIGATION
+           ========================================= */
+        header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: rgba(249, 247, 244, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(11, 27, 43, 0.05);
+            padding: 1.25rem 0;
+            transition: var(--transition-smooth);
+        }
+
+        .nav-inner { justify-content: space-between; }
+        
+        .logo { 
+            font-family: var(--font-serif); 
+            font-size: 1.5rem; 
+            font-weight: 700; 
+            color: var(--color-navy);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .logo-mark {
+            width: 32px; height: 32px;
+            background: var(--color-primary);
+            border-radius: 4px;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 1.2rem;
+        }
+
+        nav ul { list-style: none; gap: 2.5rem; }
+        nav a { 
+            text-decoration: none; 
+            color: var(--color-text); 
+            font-size: 0.9rem; 
+            font-weight: 500;
+            position: relative;
+        }
+        
+        nav a::after {
+            content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px;
+            background: var(--color-primary); transition: var(--transition-smooth);
+        }
+        nav a:hover::after { width: 100%; }
+
+        /* =========================================
+           HERO SECTION
+           ========================================= */
+        .hero {
+            padding-top: 10rem;
+            padding-bottom: 6rem;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(3rem, 5vw, 4.5rem);
+            margin-bottom: 1.5rem;
+            color: var(--color-navy);
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 90%;
+            font-weight: 300;
+        }
+
+        .hero-buttons { gap: 1rem; }
+
+        .hero-visual {
+            position: relative;
+            height: 600px;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(11, 27, 43, 0.15);
+        }
+
+        .hero-visual img {
+            width: 100%; height: 100%; object-fit: cover;
+            filter: saturate(0.9) contrast(1.05);
+        }
+
+        .hero-badge {
+            position: absolute;
+            bottom: 2rem; left: 2rem;
+            background: rgba(255,255,255,0.95);
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-md);
+            backdrop-filter: blur(8px);
+            border-left: 3px solid var(--color-primary);
+        }
+
+        /* =========================================
+           SERVICES SECTION
+           ========================================= */
+        .services { padding: var(--section-padding); background: #fff; }
+        
+        .section-header { margin-bottom: 4rem; max-width: 600px; }
+        .section-label { 
+            color: var(--color-primary); 
+            margin-bottom: 1rem; 
+            display: block; 
+        }
+        
+        .section-title { font-size: 2.75rem; margin-bottom: 1rem; }
+        .section-desc { color: var(--color-text-muted); font-size: 1.1rem; }
+
+        .service-cards {
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        }
+
+        .service-card {
+            padding: 3rem 2.5rem;
+            border: 1px solid rgba(11, 27, 43, 0.08);
+            border-radius: var(--radius-md);
+            transition: var(--transition-smooth);
+            background: var(--color-ivory);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(11, 27, 43, 0.08);
+            border-color: var(--color-primary);
+        }
+
+        .service-icon {
+            width: 56px; height: 56px;
+            background: var(--color-navy);
+            color: var(--color-primary);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .service-card h3 { font-size: 1.75rem; margin-bottom: 0.5rem; }
+        .service-card .subtitle { 
+            color: var(--color-gold); 
+            font-size: 0.85rem; 
+            margin-bottom: 1.5rem; 
+            display: block; 
+        }
+        
+        .service-list { list-style: none; margin-top: 1.5rem; }
+        .service-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(11, 27, 43, 0.05);
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+            display: flex; align-items: center; gap: 0.75rem;
+        }
+        .service-list li::before {
+            content: '→'; color: var(--color-primary); font-weight: bold;
+        }
+
+        /* =========================================
+           TAX & ACCOUNTING SECTIONS (Split)
+           ========================================= */
+        .split-section { padding: var(--section-padding); }
+        .split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        
+        .split-content .mono-accent { color: var(--color-primary); margin-bottom: 1rem; display: block; }
+        .split-content h2 { font-size: 2.5rem; margin-bottom: 1.5rem; }
+        .split-content p { color: var(--color-text-muted); margin-bottom: 2rem; font-size: 1.1rem; }
+        
+        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+        .stat-item h4 { font-size: 2.5rem; color: var(--color-navy); margin-bottom: 0.25rem; }
+        .stat-item span { font-size: 0.85rem; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+
+        .split-image {
+            height: 500px;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            position: relative;
+        }
+        .split-image img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* =========================================
+           PREMIUM BUSINESS MANAGEMENT (Dark)
+           ========================================= */
+        .premium-section {
+            background-color: var(--color-navy);
+            color: #fff;
+            padding: var(--section-padding);
+            position: relative;
+        }
+
+        .premium-section .section-label { color: var(--color-gold); }
+        .premium-section .section-title { color: #fff; }
+        .premium-section .section-desc { color: rgba(255,255,255,0.6); }
+
+        .audience-grid {
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            margin-top: 4rem;
+        }
+
+        .audience-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 2.5rem;
+            border-radius: var(--radius-md);
+            transition: var(--transition-smooth);
+            cursor: pointer;
+        }
+
+        .audience-card:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: var(--color-primary);
+            transform: translateY(-5px);
+        }
+
+        .audience-card h3 { font-size: 1.5rem; margin-bottom: 0.5rem; color: #fff; }
+        .audience-card p { color: rgba(255,255,255,0.5); font-size: 0.95rem; margin-bottom: 1.5rem; }
+        
+        .card-link {
+            color: var(--color-primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: inline-flex; align-items: center; gap: 0.5rem;
+        }
+
+        /* =========================================
+           INSIGHTS HUB
+           ========================================= */
+        .insights { padding: var(--section-padding); background: var(--color-sand); }
+        
+        .insight-grid {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .insight-card {
+            background: #fff;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            transition: var(--transition-smooth);
+        }
+        .insight-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.05); }
+        
+        .insight-img { height: 220px; background: #ddd; position: relative; }
+        .insight-img img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .insight-content { padding: 2rem; }
+        .insight-meta { font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: 0.75rem; display: block; }
+        .insight-content h3 { font-size: 1.35rem; margin-bottom: 1rem; line-height: 1.3; }
+        .read-more { color: var(--color-primary); text-decoration: none; font-weight: 500; font-size: 0.9rem; }
+
+        /* =========================================
+           CONTACT SECTION
+           ========================================= */
+        .contact { padding: var(--section-padding); }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; }
+        
+        .contact-info h2 { font-size: 2.5rem; margin-bottom: 1.5rem; }
+        .contact-detail { margin-bottom: 1.5rem; display: flex; align-items: flex-start; gap: 1rem; }
+        .contact-detail strong { display: block; margin-bottom: 0.25rem; color: var(--color-navy); }
+        .contact-detail span { color: var(--color-text-muted); }
+
+        .portal-links { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(11,27,43,0.1); }
+        .portal-links h4 { font-family: var(--font-sans); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; color: var(--color-text-muted); }
+        .portal-btn {
+            display: inline-flex; align-items: center; gap: 0.75rem;
+            padding: 0.75rem 1.25rem;
+            background: #fff;
+            border: 1px solid rgba(11,27,43,0.1);
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            color: var(--color-navy);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-right: 1rem;
+            margin-bottom: 0.75rem;
+            transition: var(--transition-smooth);
+        }
+        .portal-btn:hover { border-color: var(--color-primary); color: var(--color-primary); }
+
+        .contact-form {
+            background: #fff;
+            padding: 3rem;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 10px 40px rgba(11,27,43,0.05);
+        }
+
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 500; color: var(--color-navy); }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid rgba(11,27,43,0.1);
+            border-radius: var(--radius-sm);
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            background: var(--color-ivory);
+            transition: var(--transition-smooth);
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none; border-color: var(--color-primary); background: #fff;
+        }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+
+        /* Footer */
+        footer { background: var(--color-navy); color: rgba(255,255,255,0.6); padding: 4rem 0 2rem; font-size: 0.9rem; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+        .footer-brand { color: #fff; font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 1rem; display: block; }
+        .footer-col h4 { color: #fff; font-family: var(--font-sans); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.5rem; }
+        .footer-col ul { list-style: none; }
+        .footer-col li { margin-bottom: 0.75rem; }
+        .footer-col a { color: rgba(255,255,255,0.6); text-decoration: none; transition: 0.3s; }
+        .footer-col a:hover { color: var(--color-primary); }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; display: flex; justify-content: space-between; }
+
+        /* Responsive Adjustments */
+        @media(max-width: 1024px) {
+            .hero-grid, .split-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .hero-visual { height: 400px; order: -1; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media(max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            .section-title { font-size: 2rem; }
+            .form-row { grid-template-columns: 1fr; }
+            nav ul { display: none; } /* Simplified mobile nav for demo */
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header id="navbar">
+        <div class="container flex nav-inner">
+                    <img style="width: 60px; height: 50px;" src="https://i.ibb.co.com/Z1R7c3TD/FWFM-Logo-removebg-preview.png">
+                
+          
+            <nav class="hidden-mobile">
+                <ul class="flex">
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#tax">Tax</a></li>
+                    <li><a href="#accounting">Accounting</a></li>
+                    <li><a href="#advisory">Advisory</a></li>
+                    <li><a href="#insights">Insights</a></li>
+                </ul>
+            </nav>
+            <a href="#contact" class="btn btn-primary hidden-mobile">Client Portal</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <span class="mono-accent">Established Excellence</span>
+                <h1>Financial clarity for every stage of success.</h1>
+                <p>Accounting, tax preparation, and business management solutions designed for individuals and enterprises who demand precision.</p>
+                <div class="flex hero-buttons">
+                    <a href="#contact" class="btn btn-primary">Schedule Consultation</a>
+                    <a href="#services" class="btn btn-outline">Explore Services</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <!-- Placeholder for Luxury Office Image -->
+                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1200" alt="Modern Executive Workspace">
+                <div class="hero-badge">
+                    <span class="mono-accent" style="color:var(--color-navy); font-size:0.75rem;">Trusted By</span>
+                    <div style="font-weight:600; color:var(--color-navy); margin-top:0.25rem;">500+ High-Net-Worth Clients</div>
+    </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <span class="mono-accent section-label">Our Expertise</span>
+                <h2 class="section-title">Comprehensive financial stewardship.</h2>
+                <p class="section-desc">We provide tailored solutions that adapt to your unique financial landscape, ensuring growth and security.</p>
+            </div>
+            
+            <div class="grid service-cards">
+                <!-- Card 1 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    </div>
+                    <h3>Tax Preparation</h3>
+                    <span class="subtitle mono-accent">For Individuals & Families</span>
+                    <p style="color:var(--color-text-muted); font-size:0.95rem;">Strategic filing and planning to maximize returns while ensuring full compliance.</p>
+                    <ul class="service-list">
+                        <li>Accurate Multi-State Filing</li>
+                        <li>Proactive Tax Planning</li>
+                        <li>Secure Document Handling</li>
+                    </ul>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    </div>
+                    <h3>Strategic Accounting</h3>
+                    <span class="subtitle mono-accent">For Businesses</span>
+                    <p style="color:var(--color-text-muted); font-size:0.95rem;">Clear financial reporting that transforms data into actionable business intelligence.</p>
+                    <ul class="service-list">
+                        <li>Precision Bookkeeping</li>
+                        <li>Monthly Financial Reporting</li>
+                        <li>Cash Flow Optimization</li>
+                    </ul>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                    </div>
+                    <h3>Business Management</h3>
+                    <span class="subtitle mono-accent">For High-Profile Clients</span>
+                    <p style="color:var(--color-text-muted); font-size:0.95rem;">Private advisory services for those requiring discretion and long-term wealth strategy.</p>
+                    <ul class="service-list">
+                        <li>Private Wealth Advisory</li>
+                        <li>Legacy & Estate Strategy</li>
+                        <li>Entity Structuring</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tax Experience Section -->
+    <section id="tax" class="split-section" style="background:#fff;">
+        <div class="container split-grid">
+            <div class="split-image">
+                <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=800" alt="Tax Planning Session">
+            </div>
+            <div class="split-content">
+                <span class="mono-accent">Tax Experience</span>
+                <h2>Professional support for everyone.</h2>
+                <p>Tax season shouldn't be a source of anxiety. We provide warm, inclusive, and meticulous tax support for individuals and families at every income level. Our approach combines technical expertise with genuine care for your financial well-being.</p>
+                <div class="stat-grid">
+                    <div class="stat-item">
+                        <h4>98%</h4>
+                        <span>Client Retention</span>
+                    </div>
+                    <div class="stat-item">
+                        <h4>24h</h4>
+                        <span>Avg. Response Time</span>
+                    </div>
+                </div>
+                <a href="#contact" class="btn btn-outline" style="margin-top:2rem;">Start Your Return</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Accounting Section -->
+    <section id="accounting" class="split-section">
+        <div class="container split-grid">
+            <div class="split-content">
+                <span class="mono-accent">Corporate Accounting</span>
+                <h2>Clarity for growing companies.</h2>
+                <p>Behind every successful enterprise is a foundation of accurate financial data. We partner with growing businesses to provide the accounting infrastructure needed to scale confidently and make informed strategic decisions.</p>
+                <ul class="service-list" style="margin-top:1rem;">
+                    <li>GAAP Compliant Reporting</li>
+                    <li>Payroll & Benefits Administration</li>
+                    <li>Regulatory Compliance Audits</li>
+                </ul>
+                <a href="#contact" class="btn btn-primary" style="margin-top:2rem;">Partner With Us</a>
+            </div>
+            <div class="split-image">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800" alt="Business Analytics Dashboard">
+            </div>
+        </div>
+    </section>
+
+    <!-- Premium Business Management (Dark) -->
+    <section id="advisory" class="premium-section">
+        <div class="container">
+            <div class="text-center" style="max-width:700px; margin:0 auto;">
+                <span class="mono-accent section-label">Private Advisory Ecosystem</span>
+                <h2 class="section-title">Tailored for distinction.</h2>
+                <p class="section-desc">Exclusive financial management services designed for those who operate at the highest levels of performance and influence.</p>
+            </div>
+
+            <div class="grid audience-grid">
+                <div class="audience-card">
+                    <span class="mono-accent" style="color:var(--color-primary); margin-bottom:1rem; display:block;">01</span>
+                    <h3>Elite Performers</h3>
+                    <p>Athletes, entertainers, and public figures requiring specialized contract analysis and income management.</p>
+                    <a href="#contact" class="card-link">Learn More →</a>
+                </div>
+                <div class="audience-card">
+                    <span class="mono-accent" style="color:var(--color-primary); margin-bottom:1rem; display:block;">02</span>
+                    <h3>Corporate Leaders</h3>
+                    <p>C-Suite executives and board members seeking personal wealth alignment with corporate responsibilities.</p>
+                    <a href="#contact" class="card-link">Learn More →</a>
+                </div>
+                <div class="audience-card">
+                    <span class="mono-accent" style="color:var(--color-primary); margin-bottom:1rem; display:block;">03</span>
+                    <h3>Wealth Creators</h3>
+                    <p>Founders and entrepreneurs navigating liquidity events, equity structuring, and reinvestment strategies.</p>
+                    <a href="#contact" class="card-link">Learn More →</a>
+                </div>
+                <div class="audience-card">
+                    <span class="mono-accent" style="color:var(--color-primary); margin-bottom:1rem; display:block;">04</span>
+                    <h3>Legacy Planners</h3>
+                    <p>Multi-generational families focused on preservation, estate transfer, and philanthropic impact.</p>
+                    <a href="#contact" class="card-link">Learn More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Insights Hub -->
+    <section id="insights" class="insights">
+        <div class="container">
+            <div class="flex" style="justify-content:space-between; margin-bottom:3rem; align-items:flex-end;">
+                <div>
+                    <span class="mono-accent section-label">Knowledge Center</span>
+                    <h2 class="section-title" style="margin-bottom:0;">Latest Insights</h2>
+                </div>
+                <a href="#" class="read-more hidden-mobile">View All Articles →</a>
+            </div>
+
+            <div class="grid insight-grid">
+                <article class="insight-card">
+                    <div class="insight-img">
+                        <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&q=80&w=600" alt="Tax Tips">
+                    </div>
+                    <div class="insight-content">
+                        <span class="insight-meta mono-accent">Tax Strategy • Jan 2026</span>
+                        <h3>Navigating the New Fiscal Year: Key Changes for High Earners</h3>
+                        <a href="#" class="read-more">Read Article</a>
+                    </div>
+                </article>
+                <article class="insight-card">
+                    <div class="insight-img">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=600" alt="Business Growth">
+                    </div>
+                    <div class="insight-content">
+                        <span class="insight-meta mono-accent">Business • Dec 2025</span>
+                        <h3>The Role of Predictive Accounting in Modern Enterprise Scaling</h3>
+                        <a href="#" class="read-more">Read Article</a>
+                    </div>
+                </article>
+                <article class="insight-card">
+                    <div class="insight-img">
+                        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=600" alt="Wealth Management">
+                    </div>
+                    <div class="insight-content">
+                        <span class="insight-meta mono-accent">Advisory • Nov 2025</span>
+                        <h3>Intergenerational Wealth Transfer: Beyond the Will</h3>
+                        <a href="#" class="read-more">Read Article</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container contact-grid">
+            <div class="contact-info">
+                <span class="mono-accent section-label">Get In Touch</span>
+                <h2>Begin your consultation.</h2>
+                <p style="color:var(--color-text-muted); margin-bottom:2rem; font-size:1.1rem;">Ready to elevate your financial strategy? Reach out to our team for a confidential discussion about your needs.</p>
+                
+                <div class="contact-detail">
+                    <div style="color:var(--color-primary);"></div>
+                    <div>
+                        <strong>Headquarters</strong>
+                        <span>100 Financial District Blvd, Suite 4500<br>New York, NY 10005</span>
+                    </div>
+                </div>
+                <div class="contact-detail">
+                    <div style="color:var(--color-primary);">✉️</div>
+                    <div>
+                        <strong>Email</strong>
+                        <span>advisory@folkwilliams.com</span>
+                    </div>
+                </div>
+                <div class="contact-detail">
+                    <div style="color:var(--color-primary);">📞</div>
+                    <div>
+                        <strong>Phone</strong>
+                        <span>+1 (212) 555-0199</span>
+                    </div>
+                </div>
+
+                <div class="portal-links">
+                    <h4>Secure Client Portals</h4>
+                    <a href="https://www.schwab.com" target="_blank" class="portal-btn">
+                        <span style="font-weight:700; color:#0078D2;">SCHWAB</span> Access
+                    </a>
+                    <a href="https://www.fidelity.com" target="_blank" class="portal-btn">
+                        <span style="font-weight:700; color:#7D1E32;">FIDELITY</span> Access
+                    </a>
+                </div>
+            </div>
+
+            <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you. A senior advisor will contact you shortly.');">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" placeholder="John" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" placeholder="Williams" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" placeholder="john@company.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" placeholder="+1 (555) 000-0000">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Service Interest</label>
+                    <select>
+                        <option>Tax Preparation</option>
+                        <option>Strategic Accounting</option>
+                        <option>Business Management / Advisory</option>
+                        <option>General Inquiry</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea rows="4" placeholder="How can we assist you today?"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%;">Request Consultation</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+
+                    <span class="footer-brand"> <img style="width: 60px; height: 50px;" src="https://i.ibb.co.com/Z1R7c3TD/FWFM-Logo-removebg-preview.png"></span>
+                    <p style="max-width:300px; line-height:1.6;">Providing institutional-grade financial clarity and stewardship for individuals and enterprises since 1998.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#">Tax Preparation</a></li>
+                        <li><a href="#">Accounting</a></li>
+                        <li><a href="#">Advisory</a></li>
+                        <li><a href="#">Estate Planning</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Insights</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Disclosures</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 Folk Williams Financial Management. All rights reserved.</span>
+                <span class="mono-accent">SEC Registered Investment Advisor</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth Scroll for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if(target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.style.boxShadow = '0 4px 20px rgba(11, 27, 43, 0.08)';
+                navbar.style.padding = '0.75rem 0';
+            } else {
+                navbar.style.boxShadow = 'none';
+                navbar.style.padding = '1.25rem 0';
+            }
+        });
+
+        // Intersection Observer for Fade-in Animations
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Apply initial styles and observe elements
+        document.querySelectorAll('.service-card, .audience-card, .insight-card, .split-content, .split-image').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
